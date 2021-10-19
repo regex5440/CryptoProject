@@ -140,7 +140,7 @@ class CoinsLive extends React.Component {
     document.getElementsByClassName('coin_roller')[0].scrollLeft += this.extras.scrollLevel;
   };
   async componentDidMount(){
-    await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'cors'})
+    await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'no-cors',headers:{'Access-Control-Allow-Origin':'https://polka.netlify.app/'}})
     .then(response => response.json())
     .then(data => {this.setState({coins: data})});
     
