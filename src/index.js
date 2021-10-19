@@ -140,8 +140,7 @@ class CoinsLive extends React.Component {
     document.getElementsByClassName('coin_roller')[0].scrollLeft += this.extras.scrollLevel;
   };
   async componentDidMount(){
-    let coins = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`).then(response => response.json()).then(data => { return data});
-    this.setState({coins: coins});
+    await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'no-cors'}).then(response => response.json()).then(data => { this.setState({coins: data});});
   }
   render() {
     return <div className="coin_space">
