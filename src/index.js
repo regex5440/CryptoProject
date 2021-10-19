@@ -140,15 +140,16 @@ class CoinsLive extends React.Component {
     document.getElementsByClassName('coin_roller')[0].scrollLeft += this.extras.scrollLevel;
   };
   async componentDidMount(){
-    let respose = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'cors'})
+    await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'cors'})
     .then(response => response.json())
-    .then(data => {return data });
-    this.setState({coins: respose})
+    .then(data => {this.setState({coins: data})});
+    
   }
   render() {
     return <div className="coin_space">
       <p title="Prices gets updated every 10 seconds"><span>Live</span> Prices</p>
       <div className="coin_roller">
+        {console.log(this.state.coins)}
         {this.state.coins[0]!==null?this.state.coins.map(e => {return <Coin key={e.id} data={e} />}):<div className="loading"></div>}
       </div>
       <div className="leftSlide slidebtn" onClick={this.slideLeft}></div>
