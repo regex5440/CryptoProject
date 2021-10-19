@@ -104,7 +104,8 @@ function Coin(coin) {
   const styler = {
     background: `url("${data.logo_url}")`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain'
+    backgroundSize: 'contain',
+    transition: '500ms easr-in'
   }
   return <div className="coins" title={data.name}>
     <div className="logo" style={styler}></div>
@@ -145,14 +146,22 @@ class CoinsLive extends React.Component {
     console.log(data)
     this.setState({coins: data});
   }
+  dummyCoin = ()=>{
+    let dummyItems = []
+    for(let i =0; i<this.state.noOfCoins;i++){
+      dummyItems.push(<div className="dummy coins"></div>)
+    }
+    return dummyItems;
+  }
   render() {
     return <div className="coin_space">
-      <p title="Prices gets updated every 10 seconds"><span>Live</span> Prices</p>
+      <p title="Prices gets updated every 10 seconds"><span> Live</span> Prices</p>
       <div className="coin_roller">
-        {this.state.coins[0] !== null ? this.state.coins.map(e => { return <Coin key={e.id} data={e} /> }) : <div className="loading"></div>}
+        {(this.state.coins[0] !== null?this.state.coins.map(e => { return <Coin key={e.id} data={e} /> }):this.dummyCoin().map(e=>{return e}))}
       </div>
       <div className="leftSlide slidebtn" onClick={this.slideLeft}></div>
       <div className="rightSlide slidebtn" onClick={this.slideRight}></div>
+      <a href="https://nomics.com">Crypto Market Cap & Pricing Data Provided By Nomics</a>
     </div>;
   }
 }
