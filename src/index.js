@@ -140,20 +140,9 @@ class CoinsLive extends React.Component {
     document.getElementsByClassName('coin_roller')[0].scrollLeft += this.extras.scrollLevel;
   };
   async componentDidMount() {
-    let response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`, {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      mode: 'no-cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin" : "*", 
-        "Access-Control-Allow-Credentials" : true 
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    });
+    let response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`)
     let data = await response.json();
+    console.log(data)
     this.setState({coins: data});
   }
   render() {
