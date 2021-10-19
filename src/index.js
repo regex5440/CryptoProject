@@ -63,39 +63,39 @@ function HamBurger(props) {
 }
 
 //////////////////Header Starts Here
-class Header extends React.Component{            // Complete Header Component
-  constructor(){
+class Header extends React.Component {            // Complete Header Component
+  constructor() {
     super();
-    this.options=['Crypto', 'Contact', 'Support', 'FAQ', 'About'];
-    this.state={
+    this.options = ['Crypto', 'Contact', 'Support', 'FAQ', 'About'];
+    this.state = {
       isOpen: false,
       navOptionStyle: {
       }
     };
-    this.headerStyle={
+    this.headerStyle = {
       boxShadow: '2px 4px 10px rgba(74, 71, 104, 0.445)'
     };
   }
-  changeHamState=(x)=>{
-    this.setState({isOpen: x});
-    if(this.state.isOpen){
-      this.setState({navOptionStyle: {display: 'none'}})
-    }else{
-      this.setState({navOptionStyle: {display: 'block'}})
+  changeHamState = (x) => {
+    this.setState({ isOpen: x });
+    if (this.state.isOpen) {
+      this.setState({ navOptionStyle: { display: 'none' } })
+    } else {
+      this.setState({ navOptionStyle: { display: 'block' } })
     }
   }
-  render(){
-  return <header style={this.headerStyle}>
-    <div className="header_content">
-      <div className="header_logo">Company Logo</div>
-      <HamBurger isOpen={this.state.isOpen} transfer={this.changeHamState}/>
-      <nav style={this.state.navOptionStyle}>
-        <ul>
-          {this.options.map(e => <li key={this.options.indexOf(e)}>{e}</li>)}
-        </ul>
-      </nav>
-    </div>
-  </header>
+  render() {
+    return <header style={this.headerStyle}>
+      <div className="header_content">
+        <div className="header_logo">Company Logo</div>
+        <HamBurger isOpen={this.state.isOpen} transfer={this.changeHamState} />
+        <nav style={this.state.navOptionStyle}>
+          <ul>
+            {this.options.map(e => <li key={this.options.indexOf(e)}>{e}</li>)}
+          </ul>
+        </nav>
+      </div>
+    </header>
   }
 }
 /////////////                Live Coin Structure
@@ -139,18 +139,18 @@ class CoinsLive extends React.Component {
   slideRight = () => {
     document.getElementsByClassName('coin_roller')[0].scrollLeft += this.extras.scrollLevel;
   };
-  async componentDidMount(){
-    await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'no-cors',headers:{'Access-Control-Allow-Origin':'https://polka.netlify.app/'}})
-    .then(response => response.json())
-    .then(data => {this.setState({coins: data})});
-    
+  async componentDidMount() {
+    await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({coins: data});
+      });
   }
   render() {
     return <div className="coin_space">
       <p title="Prices gets updated every 10 seconds"><span>Live</span> Prices</p>
       <div className="coin_roller">
-        {console.log(this.state.coins)}
-        {this.state.coins[0]!==null?this.state.coins.map(e => {return <Coin key={e.id} data={e} />}):<div className="loading"></div>}
+        {this.state.coins[0] !== null ? this.state.coins.map(e => { return <Coin key={e.id} data={e} /> }) : <div className="loading"></div>}
       </div>
       <div className="leftSlide slidebtn" onClick={this.slideLeft}></div>
       <div className="rightSlide slidebtn" onClick={this.slideRight}></div>
