@@ -123,7 +123,7 @@ class CoinsLive extends React.Component {
       scrollLevel: 170
     };
     this.state = {
-      noOfCoins: 50,
+      noOfCoins: 15,
       api_key: 'fd1c3a79525452330e652ca6a03b49c4ce5d6c51',
       sort: 'rank',
       status: 'active',
@@ -140,7 +140,10 @@ class CoinsLive extends React.Component {
     document.getElementsByClassName('coin_roller')[0].scrollLeft += this.extras.scrollLevel;
   };
   async componentDidMount(){
-    await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'no-cors'}).then(response => response.json()).then(data => { this.setState({coins: data});});
+    let respose = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`,{mode: 'cors'})
+    .then(response => response.json())
+    .then(data => {return data });
+    this.setState({coins: respose})
   }
   render() {
     return <div className="coin_space">
