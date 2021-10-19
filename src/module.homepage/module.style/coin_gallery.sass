@@ -1,0 +1,75 @@
+
+.coin_space
+    position: relative
+    width: 99%
+    overflow-x: hidden
+    margin: auto
+    p
+        text-align: right
+        border: 1px solid black
+    .coin_roller
+        display: flex
+        overflow-x: scroll
+        padding: 0 0 10px 0
+        flex-direction: row
+        scrollbar-width: none //Firefox
+        -webkit-overflow-scrolling: none //IE and Edge
+        scroll-behavior: smooth
+    .coin_roller::-webkit-scrollbar
+        display: none
+    .coins
+        position: relative
+        padding: 20px 40px 20px 80px
+        border-radius: 10%
+        min-width: 100px
+        margin: 4px
+        transition: 200ms ease-in
+        box-shadow: 0.5px 1px 5px rgba(74, 71, 104, 0.445)
+        cursor: pointer
+        .logo
+            position: absolute
+            left: 10%
+            top: 40%
+            transform: translate(-10%, -40%)
+            height: 40%
+            width: 40%
+            z-index: 0
+            filter: blur(1px) opacity(0.5)
+        .content  
+            font-style: italic 
+            word-break: keep-all          
+            #rank
+                position: absolute
+                bottom: 5px
+                left: 38%
+                text-align: center
+                
+    .coins:hover
+        box-shadow: 1px 2px 6px rgba(74, 71, 104, 0.445), 2.5px 5px 12px rgba(74, 71, 104, 0.281), 3px 5.8px 16px rgba(74, 71, 104, 0.151)
+    .slidebtn
+        position: absolute
+        top: 50%
+        height: 0
+        width: 0
+        padding: 8px
+        border-top: 5px solid #000
+        border-right: 5px solid #000
+        transform: rotate(45deg)
+        border-radius: 4px
+        cursor: pointer
+        transition: 200ms ease-in-out
+    .rightSlide
+        right: -20px
+    .leftSlide
+        left: -20px
+        transform: rotate(-135deg)
+    
+    .coin_roller:hover + .leftSlide,.leftSlide:hover
+        left: 20px
+    .coin_roller:hover ~ .rightSlide,.rightSlide:hover
+        right: 20px
+    
+.loading
+    height: 110px
+    width: 100%
+    background: linear-gradient(120deg, #646464c7,rgb(255, 255, 255) 10%,#646464c7)
