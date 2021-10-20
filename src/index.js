@@ -175,7 +175,7 @@ class CoinsLive extends React.Component {
       </div>
       <div className="leftSlide slidebtn" onClick={this.slideLeft}></div>
       <div className="rightSlide slidebtn" onClick={this.slideRight}></div>
-      <a target="_blank" href="https://nomics.com">Crypto Market Cap & Pricing Data Provided By Nomics</a>
+      <a target="_blank" rel="noopener noreferrer" href="https://nomics.com">Crypto Market Cap & Pricing Data Provided By Nomics</a>
     </div>;
   }
 }
