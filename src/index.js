@@ -105,7 +105,7 @@ function Coin(coin) {
     background: `url("${data.logo_url}")`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'contain',
-    transition: '500ms easr-in'
+    transition: '5s ease-in'
   }
   return <div className="coins" title={data.name}>
     <div className="logo" style={styler}></div>
@@ -121,10 +121,11 @@ class CoinsLive extends React.Component {
   constructor() {
     super();
     this.extras = {
-      scrollLevel: 170
+      scrollLevel: 200,
+      timer: null
     };
     this.state = {
-      noOfCoins: 15,
+      noOfCoins: 25,
       api_key: 'fd1c3a79525452330e652ca6a03b49c4ce5d6c51',
       sort: 'rank',
       status: 'active',
@@ -143,13 +144,26 @@ class CoinsLive extends React.Component {
   async componentDidMount() {
     let response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`)
     let data = await response.json();
-    console.log(data)
-    this.setState({coins: data});
+    this.setState({ coins: data });
+    /*
+    this.extras.timer = setInterval(() => {
+      let response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`)
+      console.log("Delay");
+      setTimeout(() => {
+        data = response.json()
+        this.setState({ coins: data });
+        //let data = response.json();
+        //this.setState({ coins: data });
+      }, 5000);
+    }, 10000);*/
   }
-  dummyCoin = ()=>{
+  componentWillUnmount() {
+    clearInterval(this.extras.timer);
+  }
+  dummyCoin = () => {
     let dummyItems = []
-    for(let i =0; i<this.state.noOfCoins;i++){
-      dummyItems.push(<div className="dummy coins"></div>)
+    for (let i = 0; i < this.state.noOfCoins; i++) {
+      dummyItems.push(<div className="dummy coins" key={i}></div>)
     }
     return dummyItems;
   }
@@ -157,11 +171,11 @@ class CoinsLive extends React.Component {
     return <div className="coin_space">
       <p title="Prices gets updated every 10 seconds"><span> Live</span> Prices</p>
       <div className="coin_roller">
-        {(this.state.coins[0] !== null?this.state.coins.map(e => { return <Coin key={e.id} data={e} /> }):this.dummyCoin().map(e=>{return e}))}
+        {(this.state.coins[0] !== null ? this.state.coins.map(e => { return <Coin key={e.id} data={e} /> }) : this.dummyCoin().map(e => { return e }))}
       </div>
       <div className="leftSlide slidebtn" onClick={this.slideLeft}></div>
       <div className="rightSlide slidebtn" onClick={this.slideRight}></div>
-      <a href="https://nomics.com">Crypto Market Cap & Pricing Data Provided By Nomics</a>
+      <a target="_blank" href="https://nomics.com">Crypto Market Cap & Pricing Data Provided By Nomics</a>
     </div>;
   }
 }
