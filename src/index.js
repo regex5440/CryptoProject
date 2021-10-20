@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './header.sass';
@@ -141,21 +141,16 @@ class CoinsLive extends React.Component {
   slideRight = () => {
     document.getElementsByClassName('coin_roller')[0].scrollLeft += this.extras.scrollLevel;
   };
-  async componentDidMount() {
+  async fetchnUpdate(){
     let response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`)
     let data = await response.json();
     this.setState({ coins: data });
-    /*
+  }
+  componentDidMount() {
+    this.fetchnUpdate();
     this.extras.timer = setInterval(() => {
-      let response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=${this.state.api_key}&interval=10s&convert=${this.state.currency}&status=active&per-page=${this.state.noOfCoins}&page=1`)
-      console.log("Delay");
-      setTimeout(() => {
-        data = response.json()
-        this.setState({ coins: data });
-        //let data = response.json();
-        //this.setState({ coins: data });
-      }, 5000);
-    }, 10000);*/
+      this.fetchnUpdate();
+    }, 10000);
   }
   componentWillUnmount() {
     clearInterval(this.extras.timer);
