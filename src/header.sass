@@ -1,21 +1,22 @@
 @mixin option-shadow()
-    box-shadow: 2px 4px 7px rgba(119, 107, 228, 0.445)
-    box-shadow: 2.5px 5px 10px rgba(119, 107, 228, 0.37)
-    box-shadow: 3px 5.8px 12px rgba(119, 107, 228, 0.26)
-$header_options: rgb(119, 107, 228)
+    box-shadow: 1px 2px 4px rgba(119, 107, 228, 0.445)
+    box-shadow: 1.5px 3px 7px rgba(119, 107, 228, 0.37)
+$header_options: rgba(199, 193, 246, 0.397)
 
 header
     position: sticky
     z-index: 10
     width: 100%
     top: 0px
-    background: rgba(15, 89, 238, 0.966)
+    background: rgba(255, 255, 255, 0.966)
     overflow: hidden
     .header_content
         margin: 20px 50px
         .header_logo
             font-size: 32px
             float: left
+            font-style: italic
+            color: hsl(0deg 50% 60% / 90%)
         #ham
             display: none
         nav
@@ -29,11 +30,11 @@ header
                     margin: 0px 5px
                     background-color: $header_options
                     cursor: pointer
-                    color: white
-                    transition: 200ms ease-in
+                    color: rgba(82, 0, 95, 0.966)
+                    transition: 200ms ease-in-out
                 li:hover
                     @include option-shadow()
-                    transform: scale(1.1)
+                    transform: scale(1.05)
 @media screen and ( max-width: 740px )
     header
         position: relative

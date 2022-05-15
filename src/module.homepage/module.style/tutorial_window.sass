@@ -1,13 +1,44 @@
 .tutorial_window
     overflow: hidden
-    margin: 30px
-    //padding: 50px 150px
+    margin: 30px auto
+    padding: 50px 150px
+    max-width: 70%
     //width: 75vw
     display: flex
     flex-direction: row
-    justify-content: space-around
-    #vr
-        height: 66.3vh
-        width: 1px
-        border-radius: 10px
-        background-color: #9999993b
+    justify-content: space-between
+    .coin_brand
+        display: flex
+        align-items: center
+        img
+            width: 70px
+            height: auto
+            aspect-ratio: 1/1
+        h2
+            margin-left: 10px
+            font-size: 32px
+            line-height: 28px
+    .coin_metadata
+        margin-left: 10px
+        margin-top: 20px
+        font-size: 22px
+        line-height: 170%
+        white-space: nowrap
+    .tutorial_col-right
+        margin-left: 30px
+        .coin_price
+            font-size: 28px
+            font-weight: 500
+            white-space: nowrap
+        sub
+            margin-left: 50px
+@media (max-width: 863px)
+    .tutorial_window
+        padding: 50px 0
+        max-width: 90%
+        flex-direction: column-reverse
+@media (max-width: 691px)
+    .tutorial_window
+        .coin_metadata
+            white-space: pre-wrap
+            line-height: 200%

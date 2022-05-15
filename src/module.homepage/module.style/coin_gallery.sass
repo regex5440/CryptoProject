@@ -24,6 +24,7 @@
     .coin_roller
         display: flex
         overflow-x: scroll
+        //flex-flow: wrap
         padding: 0 0 10px 0
         flex-direction: row
         scrollbar-width: none //Firefox
@@ -32,13 +33,15 @@
         display: none
     .coins
         position: relative
-        padding: 20px 40px 20px 80px
+        padding: 20px 40px 40px 80px
         border-radius: 10%
         min-width: 100px
+        font-size: 13px
         margin: 4px
         transition: 200ms ease-in
         box-shadow: 0.5px 1px 5px rgba(74, 71, 104, 0.445)
         cursor: pointer
+        user-select: none
         .logo
             position: absolute
             left: 10%
@@ -47,16 +50,18 @@
             height: 40%
             width: 40%
             z-index: 0
-            filter: blur(1px) opacity(0.5)
-        .content  
-            font-style: italic 
-            word-break: keep-all          
+            filter: opacity(0.8)
+        .content
+            font-style: italic
+            word-break: keep-all
+            #price strong
+                white-space: nowrap
             #rank
                 position: absolute
                 bottom: 5px
                 left: 38%
                 text-align: center
-                
+
     .coins:hover
         box-shadow: 1px 2px 6px rgba(74, 71, 104, 0.445), 2.5px 5px 12px rgba(74, 71, 104, 0.281), 3px 5.8px 16px rgba(74, 71, 104, 0.151)
     .slidebtn
@@ -76,11 +81,11 @@
     .leftSlide
         left: -20px
         transform: rotate(-135deg)
-    
+
     .coin_roller:hover + .leftSlide,.leftSlide:hover
         left: 20px
     .coin_roller:hover ~ .rightSlide,.rightSlide:hover
-        right: 20px    
+        right: 20px
     a
         text-decoration: none
         float: right
@@ -102,3 +107,8 @@
     to
         background-position: 250px 0
 
+@media screen and ( max-width: 740px )
+    .coin_space
+        .coin_roller
+        .slide_btn
+            display: none
